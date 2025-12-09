@@ -1,3 +1,129 @@
-.test{
-    color: red;
+/* Header */
+
+/* 1. Tùy chỉnh khung bao ngoài Header */
+header.header {
+  background-color: #ffffff; /* Màu nền trắng */
+  padding: 15px 0;           /* Khoảng cách trên dưới */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ phía dưới */
 }
+
+/* 2. Tùy chỉnh Logo */
+.inner-logo img {
+  max-height: 50px; /* Giới hạn chiều cao logo cho gọn */
+  width: auto;
+}
+
+/* 3. Tùy chỉnh Menu (Quan trọng) */
+.inner-menu ul {
+  list-style: none; /* Bỏ dấu chấm tròn đầu dòng */
+  margin: 0;
+  padding: 0;
+  display: flex; /* Dàn các thẻ li thành hàng ngang */
+  justify-content: flex-end; /* Đẩy menu sang phía bên phải */
+  gap: 30px; /* Khoảng cách giữa các mục menu */
+}
+
+/* Style cho từng mục link */
+.inner-menu ul li a {
+  text-decoration: none; /* Bỏ gạch chân mặc định */
+  color: #333333;        /* Màu chữ đen xám */
+  font-weight: 600;      /* Chữ đậm vừa phải */
+  font-size: 16px;
+  transition: all 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+/* Hiệu ứng khi di chuột vào link */
+.inner-menu ul li a:hover {
+  color: #007bff; /* Đổi màu xanh (giống màu mặc định Bootstrap) */
+}
+
+/* End header */
+
+
+
+
+
+
+
+/* footer */
+
+.footer {
+  background-color: #343a40; /* Màu nền tối (Dark Gray) */
+  color: #ffffff;            /* Màu chữ trắng */
+  text-align: center;        /* Căn giữa nội dung */
+  padding: 20px 0;           /* Tạo khoảng thoáng trên và dưới */
+  font-size: 14px;           /* Cỡ chữ nhỏ vừa phải */
+  width: 100%;               /* Chiếm toàn bộ chiều rộng */
+  margin-top: 30px;          /* Cách phần nội dung bên trên một chút */
+}
+
+
+
+/* End footer */
+
+/* box head */
+
+.box-head h2{
+  color: green;
+  font-size: 28px;
+}
+
+.product-item {  /* Khung bao ngoài sản phẩm */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden; /* Để ảnh bo góc theo khung */
+  position: relative; /* Để định vị nhãn giảm giá nếu cần */
+  transition: box-shadow 0.3s;
+}
+
+.product-item:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Ảnh sản phẩm */
+.inner-image img {
+  width: 100%;
+  height: auto;
+  /* aspect-ratio: 4/3; Giữ tỷ lệ ảnh đẹp */
+  object-fit: cover;
+}
+
+/* Nội dung bên dưới */
+.inner-content {
+  padding: 15px;
+}
+
+.inner-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Giá mới (To, đậm) */
+.inner-price-new {
+  font-size: 18px;
+  font-weight: bold;
+  color: #d0011b; /* Màu đỏ nổi bật */
+}
+
+/* Giá cũ (Gạch ngang, màu nhạt) */
+.inner-price-old {
+  font-size: 14px;
+  color: #999;
+  text-decoration: line-through; /* Gạch ngang giá cũ */
+  margin-top: 5px;
+}
+
+/* Nhãn giảm giá */
+.inner-discount {
+  display: inline-block;
+  background-color: #d0011b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+/*End box head */
