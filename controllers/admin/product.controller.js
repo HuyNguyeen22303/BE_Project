@@ -1,10 +1,19 @@
 const product = require("../../models/product.model");
 // {GET} /admin/products
 module.exports.index = async (req, res) => {
-    const products = await product.find({
+
+    let find = {
         deleted: false
-    })
-    console.log(products);
+
+    };
+
+    if (req.query.status) {
+        find.status = req.query.status
+    }
+
+
+    const products = await product.find(find);
+
     res.render("admin/pages/products/index", {
         pageTitle: "Trang sản phẩm",
         products: products
