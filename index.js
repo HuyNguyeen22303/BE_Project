@@ -4,6 +4,7 @@ const app = express()
 const port = process.env.PORT;
 const mongoose = require('mongoose');
 const route = require("./routes/client/index.route");
+const routeAdmin = require("./routes/admin/index.route");
 
 const database = require("./config/database");
 
@@ -17,6 +18,7 @@ app.use(express.static('public'));
 
 
 route(app);
+routeAdmin(app);
 
 
 
