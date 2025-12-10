@@ -5,9 +5,9 @@ const port = process.env.PORT;
 const mongoose = require('mongoose');
 const route = require("./routes/client/index.route");
 const routeAdmin = require("./routes/admin/index.route");
-
 const database = require("./config/database");
 const systemConfig = require("./config/system");
+
 database.connect();
 
 

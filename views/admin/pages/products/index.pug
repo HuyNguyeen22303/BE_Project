@@ -1,0 +1,49 @@
+extends ../../layouts/default.pug
+
+
+block main 
+    h1 Danh sách sản phẩm
+    table.table.table-hover.table-sm
+        thead
+            tr
+            th STT
+            th Hình ảnh
+            th Tiêu đề
+            th Giá
+            th Trạng thái
+            th Hành động
+        tbody
+            tr
+            td 1
+            td
+                img(
+                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/d/i/dien-thoai-xiaomi-poco-f6_23_.png"
+                alt="Sản phẩm 1"
+                width="100px"
+                height="auto"
+                )
+            td Sản phẩm 1
+            td 100$
+            td
+                a(href="#" class="badge text-bg-success") Hoạt động
+            td
+                button(class="btn btn-warning btn-sm") Sửa
+                button(class="btn btn-danger btn-sm ml-1") Xóa
+
+
+            tr
+            td 2
+            td
+                img(
+                src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/d/i/dien-thoai-xiaomi-poco-f6_23_.png"
+                alt="Sản phẩm 1"
+                width="100px"
+                height="auto"
+                )
+            td Sản phẩm 2
+            td 100$
+            td
+                a(href="#" class="badge text-bg-danger") Ngừng hoạt động
+            td
+                button(class="btn btn-warning btn-sm") Sửa
+                button(class="btn btn-danger btn-sm ml-1") Xóa
