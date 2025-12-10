@@ -1,0 +1,83 @@
+/*  header Admin */
+
+
+.header {
+  background-color: #20232a; 
+  padding: 10px 0;           
+  border-bottom: 1px solid #333; 
+  color: #fff;             
+}
+
+
+.header .inner-logo a {
+  font-size: 24px;           
+  font-weight: 700;         
+  color: #fff;              
+  text-decoration: none;     
+  text-transform: uppercase; 
+  letter-spacing: 1px;      
+  transition: all 0.3s ease;
+}
+
+
+.header .inner-logo a:hover {
+  color: #61dafb;           
+  opacity: 0.8;
+}
+
+
+.header .col-9 {
+  text-align: right;
+}
+
+
+/* End header Admin */
+
+
+/* sider */
+
+
+.sider {
+      background-color: #282c34;
+    color: #fff;
+    min-height: 100vh;
+    max-width: 25vw;
+    min-width: 20vw;
+    padding: 20px 10px;      
+}
+
+
+.sider ul {
+  list-style: none;          
+  padding: 0;
+  margin: 0;
+}
+
+.sider a {
+  display: block;           
+  padding: 10px 15px;        
+  color: #adb5bd;          
+  text-decoration: none;     
+  border-radius: 5px;        
+  margin-bottom: 5px;       
+  transition: all 0.3s ease; 
+}
+
+
+.sider a:hover {
+  background-color: #3d4450; 
+  color: #fff;               
+}
+
+.body{
+        display: flex;
+}
+
+
+.sider a.active {
+  background-color: #0d6efd; 
+  color: #fff;
+}
+
+
+/*End  sider */

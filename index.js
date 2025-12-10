@@ -7,7 +7,7 @@ const route = require("./routes/client/index.route");
 const routeAdmin = require("./routes/admin/index.route");
 
 const database = require("./config/database");
-
+const systemConfig = require("./config/system");
 database.connect();
 
 
@@ -19,8 +19,8 @@ app.use(express.static('public'));
 
 route(app);
 routeAdmin(app);
-
-
+// App local Variable
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 app.listen(port, () => {
 
