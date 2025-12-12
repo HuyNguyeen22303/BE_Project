@@ -38,7 +38,7 @@ if (buttonsStatus.length > 0) {
 
 
 const formSearch = document.querySelector("#form-search");
-console.log(formSearch);
+// console.log(formSearch);
 if (formSearch) {
 
 

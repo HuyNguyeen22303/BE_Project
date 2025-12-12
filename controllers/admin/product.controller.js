@@ -1,33 +1,11 @@
 const product = require("../../models/product.model");
+const fillterStatusHelper = require("../../helper/fillterStatus");
 // {GET} /admin/products
 module.exports.index = async (req, res) => {
 
     // lọc trạng thái 
-    let filterStatus = [{
-            name: "Tất cả",
-            status: "",
-            class: ""
-        },
-        {
-            name: "Hoạt động",
-            status: "active",
-            class: ""
-        },
-        {
-            name: "Dừng Hoạt động",
-            status: "inactive",
-            class: ""
-        }
-    ];
-
-    if (req.query.status) {
-        const index = filterStatus.findIndex(item => item.status == req.query.status);
-        filterStatus[index].class = "active";
-    } else {
-        const index = filterStatus.findIndex(item => item.status == "");
-        filterStatus[index].class = "active";
-    }
-
+    let filterStatus = fillterStatusHelper(req.query);
+    console.log(filterStatus);
     // ENd lọc trạng thái 
 
 
@@ -47,6 +25,9 @@ module.exports.index = async (req, res) => {
     if (req.query.status) {
         find.status = req.query.status
     }
+
+
+
     // 3. TÌM KIẾM (Nếu có ?keyword=...)
     let keyword = req.query.keyword;
     if (req.query.keyword) {
