@@ -2,7 +2,7 @@ const product = require("../../models/product.model");
 // {GET} /admin/products
 module.exports.index = async (req, res) => {
 
-
+    // lọc trạng thái 
     let filterStatus = [{
             name: "Tất cả",
             status: "",
@@ -28,7 +28,7 @@ module.exports.index = async (req, res) => {
         filterStatus[index].class = "active";
     }
 
-
+    // ENd lọc trạng thái 
 
 
 
@@ -43,8 +43,15 @@ module.exports.index = async (req, res) => {
 
     };
 
+
     if (req.query.status) {
         find.status = req.query.status
+    }
+    // 3. TÌM KIẾM (Nếu có ?keyword=...)
+    let keyword = req.query.keyword;
+    if (req.query.keyword) {
+        const regex = new RegExp(keyword, "i");
+        find.name = regex;
     }
 
 
@@ -53,6 +60,7 @@ module.exports.index = async (req, res) => {
     res.render("admin/pages/products/index", {
         pageTitle: "Trang sản phẩm",
         products: products,
-        filterStatus: filterStatus
+        filterStatus: filterStatus,
+        keyword: keyword
     })
 }
