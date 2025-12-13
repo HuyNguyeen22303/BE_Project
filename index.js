@@ -3,6 +3,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 const mongoose = require("mongoose");
+const methodOverride = require('method-override')
 const route = require("./routes/client/index.route");
 const routeAdmin = require("./routes/admin/index.route");
 const database = require("./config/database");
@@ -13,7 +14,7 @@ database.connect();
 app.set("views", "./views");
 app.set("view engine", "pug");
 app.use(express.static("public"));
-
+app.use(methodOverride('_method'));
 route(app);
 routeAdmin(app);
 // App local Variable

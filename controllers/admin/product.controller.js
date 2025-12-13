@@ -1,9 +1,8 @@
-// {GET} /admin/products
 const product = require("../../models/product.model");
 const fillterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search");
 const paginationHelper = require("../../helper/pagination");
-
+// {GET} /admin/products
 module.exports.index = async (req, res) => {
   // lọc trạng thái
   let filterStatus = fillterStatusHelper(req.query);
@@ -51,3 +50,18 @@ module.exports.index = async (req, res) => {
     pagination: objectPagination
   });
 };
+
+// {GET} /admin/products/change-status/:status/:id
+module.exports.changeStatus = async (req, res) => {
+
+  const status = req.params.status;
+  const id = req.params.id;
+
+  await product.updateOne({
+    _id: id
+  }, {
+    status: status
+  });
+  res.redirect(req.get("Referrer") || "/");
+
+}
