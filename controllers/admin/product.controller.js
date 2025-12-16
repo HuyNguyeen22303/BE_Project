@@ -110,9 +110,14 @@ module.exports.deleteItem = async (req, res) => {
 
   const id = req.params.id;
 
-  await product.deleteOne({
-    _id: id
+  await product.updateOne({
+    _id: id,
+  }, {
+    deleted: true
   })
+
+
+
   res.redirect(req.get("Referrer") || "/");
 
 }
