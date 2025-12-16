@@ -23,3 +23,31 @@ if (buttonChangeStatus.length > 0) {
 }
 
 // End change status
+
+
+
+
+// Delele item (xóa cứng , mất vĩnh viễn)
+
+const deleteItem = document.querySelectorAll("[button-delete-item]");
+if (deleteItem.length > 0) {
+  const formDeleteItem = document.querySelector("#from-delete-item");
+  const path = formDeleteItem.getAttribute("data-path");
+  deleteItem.forEach(button => {
+    button.addEventListener("click", () => {
+      const isConfirm = confirm("Bạn có chắc là sẽ xóa sản phẩm này không?");
+      if (isConfirm) {
+        const id = button.getAttribute("data-id");
+        const action = `${path}/${id}?_method=DELETE`
+        formDeleteItem.action = action;
+        formDeleteItem.submit();
+      }
+
+    });
+  });
+
+}
+
+
+
+// End Delele item

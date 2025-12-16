@@ -102,3 +102,17 @@ module.exports.changeMutil = async (req, res) => {
   res.redirect(req.get("Referrer") || "/");
 
 }
+
+
+// {DELETE} /admin/products/products/change-multi
+
+module.exports.deleteItem = async (req, res) => {
+
+  const id = req.params.id;
+
+  await product.deleteOne({
+    _id: id
+  })
+  res.redirect(req.get("Referrer") || "/");
+
+}
