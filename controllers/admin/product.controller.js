@@ -40,6 +40,7 @@ module.exports.index = async (req, res) => {
 
   // End pagination
 
+
   const products = await product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);
 
   res.render("admin/pages/products/index", {
@@ -51,7 +52,9 @@ module.exports.index = async (req, res) => {
   });
 };
 
-// {GET} /admin/products/change-status/:status/:id
+
+
+// {PATCH} /admin/products/change-status/:status/:id
 module.exports.changeStatus = async (req, res) => {
 
   const status = req.params.status;
@@ -62,6 +65,40 @@ module.exports.changeStatus = async (req, res) => {
   }, {
     status: status
   });
+  res.redirect(req.get("Referrer") || "/");
+
+}
+
+
+
+
+// {PATCH} /admin/products/products/change-multi
+module.exports.changeMutil = async (req, res) => {
+  const type = req.body.type;
+  const ids = req.body.ids.split(", ");
+  switch (type) {
+    case "active":
+      await product.updateMany({
+        _id: {
+          $in: ids
+        }
+      }, {
+        status: "active"
+      });
+      break;
+    case "inactive":
+      await product.updateMany({
+        _id: {
+          $in: ids
+        }
+      }, {
+        status: "inactive"
+      });
+      break;
+
+    default:
+      break;
+  }
   res.redirect(req.get("Referrer") || "/");
 
 }
