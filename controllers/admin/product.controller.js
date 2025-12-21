@@ -67,6 +67,8 @@ module.exports.changeStatus = async (req, res) => {
   }, {
     status: status
   });
+
+  req.flash('success', 'Cập nhật trạng thái thành công!');
   res.redirect(req.get("Referrer") || "/");
 
 }
@@ -87,6 +89,7 @@ module.exports.changeMutil = async (req, res) => {
       }, {
         status: "active"
       });
+      req.flash('success', `${ids.length} sản phẩm đã được cập nhật trạng thái hoạt động`);
       break;
     case "inactive":
       await product.updateMany({
@@ -96,6 +99,7 @@ module.exports.changeMutil = async (req, res) => {
       }, {
         status: "inactive"
       });
+      req.flash('success', `${ids.length} sản phẩm đã được cập nhật trạng thái dừng hoạt động`);
       break;
 
     case "deleted-all":
@@ -130,7 +134,7 @@ module.exports.changeMutil = async (req, res) => {
 }
 
 
-// {DELETE} /admin/products/products/change-multi
+// {DELETE} /admin/products/products/delete-item
 
 module.exports.deleteItem = async (req, res) => {
 
