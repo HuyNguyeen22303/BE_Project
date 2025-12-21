@@ -16,10 +16,13 @@ const productSchema = new mongoose.Schema({
     battery: String,
     camera: String,
     weight: String,
+
   },
   description: String,
   status: String,
   deleted: Boolean,
+  deletedAt: Date,
+  position: Number
 });
 const product = mongoose.model("product", productSchema, "products");
 

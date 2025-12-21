@@ -123,12 +123,30 @@ if (formChangeMulti) {
     e.preventDefault();
     const checkboxMulti = document.querySelector("[checkbox-mutil]");
     const inputChecked = checkboxMulti.querySelectorAll("input[name='id']:checked");
+
+
+    const typeChange = e.target.type.value;
+    if (typeChange == "delete-all") {
+      const isConfirm = confirm("Bạn có chắc là Muốn xóa sản phẩm này không");
+      if (!isConfirm)
+        return;
+    }
+
+
     if (inputChecked.length > 0) {
       let ids = [];
       const inputIds = formChangeMulti.querySelector("[name='ids']");
       inputChecked.forEach(input => {
         const id = input.value;
-        ids.push(id);
+        if (typeChange == "change-position") {
+          const position = input.closest("tr").querySelector("input[name='position']").value;
+
+          ids.push(`${id}-${position}`);
+        } else {
+          ids.push(id);
+
+        }
+
       })
       inputIds.value = ids.join(", ");
 

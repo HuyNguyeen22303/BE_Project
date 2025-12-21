@@ -41,7 +41,9 @@ module.exports.index = async (req, res) => {
   // End pagination
 
 
-  const products = await product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip);
+  const products = await product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip).sort({
+    position: "desc"
+  });
 
   res.render("admin/pages/products/index", {
     pageTitle: "Trang sản phẩm",
@@ -96,6 +98,30 @@ module.exports.changeMutil = async (req, res) => {
       });
       break;
 
+    case "deleted-all":
+      await product.updateMany({
+        _id: {
+          $in: ids
+        }
+      }, {
+        deleted: true,
+        deletedAt: new Date()
+      });
+      break;
+
+    case "change-position":
+      for (const item of ids) {
+        let [id, position] = item.split("-");
+        position = parseInt(position);
+        await product.updateOne({
+          _id: id
+        }, {
+          position: position
+        });
+      }
+
+      break;
+
     default:
       break;
   }
@@ -113,7 +139,8 @@ module.exports.deleteItem = async (req, res) => {
   await product.updateOne({
     _id: id,
   }, {
-    deleted: true
+    deleted: true,
+    deletedAt: new Date()
   })
 
 
