@@ -2,6 +2,9 @@ const product = require("../../models/product.model");
 const fillterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search");
 const paginationHelper = require("../../helper/pagination");
+const systemConfig = require("../../config/system");
+
+
 // {GET} /admin/products
 module.exports.index = async (req, res) => {
   // lọc trạng thái
@@ -152,3 +155,33 @@ module.exports.deleteItem = async (req, res) => {
   res.redirect(req.get("Referrer") || "/");
 
 }
+
+
+
+
+// {GET} /admin/products/create
+module.exports.create = async (req, res) => {
+  res.render("admin/pages/products/create", {
+    pageTitle: "Thêm mới sản phẩm",
+
+  });
+};
+
+
+// {POST} /admin/products/create
+module.exports.createPost = async (req, res) => {
+  req.body.price = parseInt(req.body.price);
+  req.body.discount = parseInt(req.body.discount);
+  req.body.stock = parseInt(req.body.stock);
+  if (req.body.position == "") {
+    countProducts = await product.countDocuments();
+    req.body.position = countProducts + 1;
+
+  } else {
+    req.body.position = parseInt(req.body.position);
+  }
+  // console.log(req.body);
+  const products = new product(req.body);
+  await products.save();
+  res.redirect(`${systemConfig.prefixAdmin}/products`);
+};

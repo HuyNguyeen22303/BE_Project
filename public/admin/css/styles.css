@@ -88,6 +88,15 @@
   margin-left: 4px;
 }
 
+.main .frm{
+  margin: 25px;
+}
+
+
+.main .frm .form-group{
+  margin-bottom: 10px;
+}
+
 /* End main */
 
 

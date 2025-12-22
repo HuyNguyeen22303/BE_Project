@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser'); // Thêm dòng này
 const session = require("express-session");
 const flash = require('express-flash');
 
+
 // Routes
 const route = require("./routes/client/index.route");
 const routeAdmin = require("./routes/admin/index.route");
