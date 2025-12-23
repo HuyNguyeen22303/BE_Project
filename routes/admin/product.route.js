@@ -20,4 +20,6 @@ routes.get("/restore", controller.trash);
 
 routes.patch("/restore/:id", controller.restoreItem);
 
+routes.delete("/delete-permanent/:id", controller.deletePermanent);
+
 module.exports = routes;

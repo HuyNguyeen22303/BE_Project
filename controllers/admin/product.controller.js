@@ -227,3 +227,17 @@ module.exports.restoreItem = async (req, res) => {
 
   res.redirect(req.get("Referrer") || "/");
 };
+
+
+
+// {DELETE} /admin/products/delete-permanent
+module.exports.deletePermanent = async (req, res) => {
+  const id = req.params.id;
+  await product.deleteOne({
+    _id: id,
+  })
+
+
+
+  res.redirect(req.get("Referrer") || "/");
+};

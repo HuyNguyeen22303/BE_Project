@@ -73,7 +73,7 @@ if (deleteItem.length > 0) {
 
 
 
-// Xử lý nút Khôi phục
+//  Restore item
 const buttonsRestore = document.querySelectorAll("[button-restore-item]");
 
 if (buttonsRestore.length > 0) {
@@ -97,3 +97,26 @@ if (buttonsRestore.length > 0) {
 
 
 // End Restore item
+
+
+
+// Delete Permanent
+const buttonsDeletePermanent = document.querySelectorAll("[button-delete-permanently]");
+if(buttonsDeletePermanent){
+  const formDeletePermanent = document.querySelector("#form-delete-permanent");
+  const path = formDeletePermanent.getAttribute("data-path");
+  buttonsDeletePermanent.forEach(button =>{
+    button.addEventListener("click" , () =>{
+      const isConfirm = confirm("Bạn có chắc muốn xóa vĩnh viễn sản phẩm này?");
+      if (isConfirm) {
+        const id = button.getAttribute("data-id");
+        const action = `${path}/${id}?_method=DELETE`;
+        console.log(`${path}/${id}?_method=PATCH`);
+        
+        formDeletePermanent.action = action;
+        formDeletePermanent.submit();
+      }
+    })
+  })
+}
+// End Delete Permanent
