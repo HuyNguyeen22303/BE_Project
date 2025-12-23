@@ -51,3 +51,49 @@ if (deleteItem.length > 0) {
 
 
 // End Delele item
+
+
+// Restore item
+// const restoreItem = document.querySelectorAll("[button-restore-item]");
+// if(restoreItem){
+//   const formRestoreItem = document.querySelector("#form-restore-item");
+//   const path = formRestoreItem.getAttribute("data-path");
+//   restoreItem.forEach(button =>{
+//     button.addEventListener("click" , () =>{
+//       const isConfirm = confirm("Bạn có chắc là sẽ khôi phục sản phẩm này không?");
+//       if (isConfirm) {
+//         const id = button.getAttribute("data-id");
+//         const action = `${path}/${id}?_method=PATH`
+//         formRestoreItem.action = action;
+//         formRestoreItem.submit();
+//       }
+//     })
+//   })
+// }
+
+
+
+// Xử lý nút Khôi phục
+const buttonsRestore = document.querySelectorAll("[button-restore-item]");
+
+if (buttonsRestore.length > 0) {
+  const formRestore = document.querySelector("#form-restore-item");
+  const path = formRestore.getAttribute("data-path");
+
+  buttonsRestore.forEach((button) => {
+    button.addEventListener("click", () => {
+      const isConfirm = confirm("Bạn có chắc muốn khôi phục sản phẩm này?");
+      if (isConfirm) {
+        const id = button.getAttribute("data-id");
+        const action = `${path}/${id}?_method=PATCH`;
+        console.log(`${path}/${id}?_method=PATCH`);
+        
+        formRestore.action = action;
+        formRestore.submit();
+      }
+    });
+  });
+}
+
+
+// End Restore item

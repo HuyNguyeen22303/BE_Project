@@ -3,8 +3,10 @@ const fillterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search");
 const paginationHelper = require("../../helper/pagination");
 const systemConfig = require("../../config/system");
+var multer = require('multer');
 
-
+const storageMulter = require("../../helper/storageMulter");
+const upload = multer({ storage: storageMulter() });
 // {GET} /admin/products
 module.exports.index = async (req, res) => {
   // lọc trạng thái
@@ -142,7 +144,7 @@ module.exports.changeMutil = async (req, res) => {
 module.exports.deleteItem = async (req, res) => {
 
   const id = req.params.id;
-
+  console.log(id);
   await product.updateOne({
     _id: id,
   }, {
@@ -168,11 +170,16 @@ module.exports.create = async (req, res) => {
 };
 
 
+
+
 // {POST} /admin/products/create
 module.exports.createPost = async (req, res) => {
+  
+
   req.body.price = parseInt(req.body.price);
   req.body.discount = parseInt(req.body.discount);
   req.body.stock = parseInt(req.body.stock);
+  
   if (req.body.position == "") {
     countProducts = await product.countDocuments();
     req.body.position = countProducts + 1;
@@ -180,8 +187,43 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
+  console.log(req.file.filename);
+  req.body.thumbnail = `/uploads/${req.file.filename}`
   // console.log(req.body);
   const products = new product(req.body);
   await products.save();
+
+
   res.redirect(`${systemConfig.prefixAdmin}/products`);
+};
+
+
+
+// {GET} /admin/products/restore
+module.exports.trash = async (req, res) => {
+    
+    const products = await product.find({
+        deleted: true
+    });
+
+    res.render("admin/pages/products/restore", {
+        pageTitle: "Thùng rác",
+        products: products
+    });
+};
+
+
+
+// {PACTH} /admin/products/restore
+module.exports.restoreItem = async (req, res) => {
+  const id = req.params.id;
+  await product.updateOne({
+    _id: id,
+  }, {
+    deleted: false,
+  })
+
+
+
+  res.redirect(req.get("Referrer") || "/");
 };
