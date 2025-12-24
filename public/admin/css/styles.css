@@ -141,3 +141,31 @@
   cursor: pointer;
 }
 /* End show alert */
+
+
+
+
+/* image-preview */
+.image-preview{
+  
+  width: 150px;
+  height: auto;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.button-x{
+  
+}
+
+.image-preview[src=""]{
+  display: none;
+}
+
+
+
+
+
+/* End image-preview */

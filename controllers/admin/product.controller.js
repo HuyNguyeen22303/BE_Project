@@ -187,9 +187,14 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
-  console.log(req.file.filename);
-  req.body.thumbnail = `/uploads/${req.file.filename}`
-  // console.log(req.body);
+ 
+
+
+  if(req.file){
+    req.body.thumbnail = `/uploads/${req.file.filename}`
+  }
+  
+  
   const products = new product(req.body);
   await products.save();
 
@@ -217,6 +222,7 @@ module.exports.trash = async (req, res) => {
 // {PACTH} /admin/products/restore
 module.exports.restoreItem = async (req, res) => {
   const id = req.params.id;
+  req.flash('restore', 'Khôi phục sản phẩm thành công!');
   await product.updateOne({
     _id: id,
   }, {
@@ -232,6 +238,7 @@ module.exports.restoreItem = async (req, res) => {
 
 // {DELETE} /admin/products/delete-permanent
 module.exports.deletePermanent = async (req, res) => {
+  req.flash('deletePermanent', 'xóa vĩnh viễn sản phẩm thành công!');
   const id = req.params.id;
   await product.deleteOne({
     _id: id,

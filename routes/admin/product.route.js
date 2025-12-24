@@ -2,6 +2,7 @@ const express = require("express");
 const routes = express.Router();
 const multer = require('multer');
 const storageMulter = require("../../helper/storageMulter");
+const validate = require("../../validates/admin/productValidate.js");
 const upload = multer({ storage: storageMulter() });
 
 const controller = require("../../controllers/admin/product.controller");
@@ -12,7 +13,8 @@ routes.patch("/change-multi", controller.changeMutil);
 routes.delete("/delete/:id", controller.deleteItem);
 routes.get("/create", controller.create);
 routes.post(
-  "/create",upload.single('thumbnail'), 
+  "/create",upload.single('thumbnail'),
+  validate.createPost,
   controller.createPost
 );
 

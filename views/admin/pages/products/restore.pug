@@ -1,8 +1,9 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/alert.pug
 block main
   h1(class="mb-4") Khôi phục sản phẩm
-
+  +alert-restore(5000)
+  +alert-deletePermanent(5000)
   .card.mb-3
     .card-header Danh sách sản phẩm đã xóa
     .card-body

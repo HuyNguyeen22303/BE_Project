@@ -1,0 +1,43 @@
+mixin alert-succes(time)
+  - if (messages.success)
+    .message.success
+      div(
+        class="alert alert-success"
+        show-alert
+        data-time=time
+
+      ) #{messages.success} <span close-alert>X</span>
+
+
+
+mixin alert-error(time)
+  - if (messages.error)
+    .message.success
+      div(
+        class="alert alert-danger"
+        show-alert
+        data-time=time
+
+      ) #{messages.error} <span close-alert>X</span>
+
+
+mixin alert-restore(time)
+  - if (messages.restore)
+    .message.success
+      div(
+        class="alert alert-success"
+        show-alert
+        data-time=time
+
+      ) #{messages.restore} <span close-alert>X</span>
+
+
+mixin alert-deletePermanent(time)
+  - if (messages.deletePermanent)
+    .message.success
+      div(
+        class="alert alert-danger"
+        show-alert
+        data-time=time
+
+      ) #{messages.deletePermanent} <span close-alert>X</span>
