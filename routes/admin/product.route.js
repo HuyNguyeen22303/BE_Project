@@ -13,7 +13,8 @@ routes.patch("/change-multi", controller.changeMutil);
 routes.delete("/delete/:id", controller.deleteItem);
 routes.get("/create", controller.create);
 routes.post(
-  "/create",upload.single('thumbnail'),
+  "/create",
+  upload.single('thumbnail'),
   validate.createPost,
   controller.createPost
 );
@@ -24,4 +25,11 @@ routes.patch("/restore/:id", controller.restoreItem);
 
 routes.delete("/delete-permanent/:id", controller.deletePermanent);
 
+routes.get("/edit/:id", controller.edit);
+routes.patch(
+  "/edit/:id",
+  upload.single('thumbnail'),
+  validate.createPost,
+  controller.editPatch
+);
 module.exports = routes;

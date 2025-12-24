@@ -6,7 +6,10 @@ const systemConfig = require("../../config/system");
 var multer = require('multer');
 
 const storageMulter = require("../../helper/storageMulter");
-const upload = multer({ storage: storageMulter() });
+
+const upload = multer({
+  storage: storageMulter()
+});
 // {GET} /admin/products
 module.exports.index = async (req, res) => {
   // lọc trạng thái
@@ -174,12 +177,12 @@ module.exports.create = async (req, res) => {
 
 // {POST} /admin/products/create
 module.exports.createPost = async (req, res) => {
-  
+
 
   req.body.price = parseInt(req.body.price);
   req.body.discount = parseInt(req.body.discount);
   req.body.stock = parseInt(req.body.stock);
-  
+
   if (req.body.position == "") {
     countProducts = await product.countDocuments();
     req.body.position = countProducts + 1;
@@ -187,14 +190,14 @@ module.exports.createPost = async (req, res) => {
   } else {
     req.body.position = parseInt(req.body.position);
   }
- 
 
 
-  if(req.file){
+
+  if (req.file) {
     req.body.thumbnail = `/uploads/${req.file.filename}`
   }
-  
-  
+
+
   const products = new product(req.body);
   await products.save();
 
@@ -206,15 +209,15 @@ module.exports.createPost = async (req, res) => {
 
 // {GET} /admin/products/restore
 module.exports.trash = async (req, res) => {
-    
-    const products = await product.find({
-        deleted: true
-    });
 
-    res.render("admin/pages/products/restore", {
-        pageTitle: "Thùng rác",
-        products: products
-    });
+  const products = await product.find({
+    deleted: true
+  });
+
+  res.render("admin/pages/products/restore", {
+    pageTitle: "Thùng rác",
+    products: products
+  });
 };
 
 
@@ -246,5 +249,53 @@ module.exports.deletePermanent = async (req, res) => {
 
 
 
+  res.redirect(req.get("Referrer") || "/");
+};
+
+
+
+// {GET} /admin/products/edit/:id
+module.exports.edit = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id
+    }
+
+    const products = await product.findOne(find);
+    console.log(products);
+    res.render("admin/pages/products/edit", {
+      pageTitle: "Chỉnh sửa sản phẩm",
+      products: products
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/products`);
+  }
+
+};
+
+
+
+// {PATCH} /admin/products/edit/:id
+module.exports.editPatch = async (req, res) => {
+  const id = req.params.id;
+  req.body.price = parseInt(req.body.price);
+  req.body.discount = parseInt(req.body.discount);
+  req.body.stock = parseInt(req.body.stock);
+  req.body.position = parseInt(req.body.position);
+
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`
+  }
+
+
+  try {
+    await product.updateOne({_id : id},req.body);
+    req.flash('success', 'Cập nhật sản phẩm thành công!');
+  } catch (error) {
+    req.flash('error', 'Cập nhật sản phẩm thất bại!');
+  }
+
+  
   res.redirect(req.get("Referrer") || "/");
 };
