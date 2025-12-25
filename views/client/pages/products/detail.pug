@@ -1,0 +1,66 @@
+extends ../../layouts/default.pug
+
+block main
+  .product-detail-page
+    .d-flex.align-items-center.justify-content-between.mb-4
+    .card.mb-4
+      .card-body
+        .row
+          //- Cột trái: Ảnh
+          .col-md-4
+            if (products.thumbnail)
+              .product-image
+                img(
+                  src=products.thumbnail
+                  class="img-fluid rounded"
+                  alt=products.title
+                )
+            else
+              .product-image
+                img(
+                  src="/admin/images/no-image.png" 
+                  class="img-fluid rounded"
+                  alt="Không có ảnh"
+                )
+
+          //- Cột phải: Thông tin
+          .col-md-8
+            if (products.name)
+              h2.mb-4.product-title #{products.name}
+
+            .row.mb-3
+              .col-md-6
+                span.font-weight-bold Giá: 
+                if (products.price)
+                  span.product-price #{products.price}$
+                else 
+                  span.text-muted Liên hệ
+
+              .col-md-6
+                span.font-weight-bold Giảm giá: 
+                if (products.discountPercentage)
+                  span.product-discount #{products.discountPercentage}%
+                else
+                  span 0%
+
+            .row.mb-3
+              .col-md-6
+                span.font-weight-bold Còn lại: 
+                span #{products.stock} sản phẩm
+
+              .col-md-6
+                span.font-weight-bold Vị trí: 
+                span #{products.position}
+
+            .mb-3
+              span.font-weight-bold Trạng thái: 
+              if (products.status === "active")
+                span.badge.text-bg-success Hoạt động
+             
+
+    //- Phần Mô tả
+    if (products.description)
+      .card
+        .card-header.font-weight-bold Mô tả sản phẩm
+        .card-body
+          .product-description !{products.description}

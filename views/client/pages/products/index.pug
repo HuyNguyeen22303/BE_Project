@@ -16,7 +16,8 @@ block main
               alt=item.name
             )
           .inner-content
-              h3.inner-title #{item.name}
+              a(href=`products/${item.slug}` class=".inner-title") #{item.name}
+              
               .inner-price-new #{item.priceNew} VNĐ 
               .inner-price-old #{item.priceOld} VNĐ
               .inner-discount #{item.discount} %

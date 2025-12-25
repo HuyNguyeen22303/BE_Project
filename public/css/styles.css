@@ -122,3 +122,54 @@ header.header {
 /*End box head */
 
 
+/* Trang chi tiết sản phẩm */
+.product-detail-page .product-image {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-detail-page .product-image img {
+  max-height: 350px; /* Giới hạn chiều cao ảnh để không bị quá khổ */
+  object-fit: contain;
+  width: 100%;
+}
+
+.product-detail-page .product-title {
+  font-size: 24px;
+  color: #333;
+  font-weight: 700;
+}
+
+.product-detail-page .product-price {
+  color: #d32f2f; /* Màu đỏ cho giá */
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.product-detail-page .product-discount {
+  color: #fff;
+  background-color: #dc3545;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.product-detail-page .product-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.product-detail-page .card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Đổ bóng nhẹ cho card */
+  border: none; /* Bỏ viền mặc định của bootstrap card */
+}
