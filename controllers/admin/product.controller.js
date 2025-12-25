@@ -299,3 +299,27 @@ module.exports.editPatch = async (req, res) => {
   
   res.redirect(req.get("Referrer") || "/");
 };
+
+
+
+
+
+// {GET} /admin/products/detail/:id
+module.exports.detail = async (req, res) => {
+  try {
+    const find = {
+      deleted: false,
+      _id: req.params.id
+    }
+
+    const products = await product.findOne(find);
+    console.log(products);
+    res.render("admin/pages/products/detail", {
+      pageTitle: "Chi tiết sản phẩm",
+      products: products
+    });
+  } catch (error) {
+    res.redirect(`${systemConfig.prefixAdmin}/products`);
+  }
+
+};

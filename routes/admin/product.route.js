@@ -32,4 +32,10 @@ routes.patch(
   validate.createPost,
   controller.editPatch
 );
+
+
+routes.get("/detail/:id", controller.detail);
+
+
+
 module.exports = routes;
