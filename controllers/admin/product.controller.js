@@ -6,6 +6,8 @@ const systemConfig = require("../../config/system");
 var multer = require('multer');
 
 const storageMulter = require("../../helper/storageMulter");
+const cloudinary = require('cloudinary').v2
+const streamifier = require('streamifier')
 
 const upload = multer({
   storage: storageMulter()
@@ -193,9 +195,7 @@ module.exports.createPost = async (req, res) => {
 
 
 
-  if (req.file) {
-    req.body.thumbnail = `/uploads/${req.file.filename}`
-  }
+  
 
 
   const products = new product(req.body);
@@ -290,13 +290,15 @@ module.exports.editPatch = async (req, res) => {
 
 
   try {
-    await product.updateOne({_id : id},req.body);
+    await product.updateOne({
+      _id: id
+    }, req.body);
     req.flash('success', 'Cập nhật sản phẩm thành công!');
   } catch (error) {
     req.flash('error', 'Cập nhật sản phẩm thất bại!');
   }
 
-  
+
   res.redirect(req.get("Referrer") || "/");
 };
 
