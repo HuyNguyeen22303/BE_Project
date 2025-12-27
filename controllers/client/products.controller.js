@@ -29,8 +29,6 @@ module.exports.index = async (req, res) => {
 // {GET} /products/:slug
 module.exports.detail = async (req, res) => {
 
-
-
   try {
     const find = {
       slug: req.params.slug,
@@ -47,14 +45,6 @@ module.exports.detail = async (req, res) => {
   } catch (error) {
     res.redirect(`/products`);
   }
-
-
-
-
-
-  
-
-
 
 
 };
