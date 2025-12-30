@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
@@ -19,6 +20,10 @@ const database = require("./config/database");
 const systemConfig = require("./config/system");
 
 database.connect();
+
+// TinyMCE 
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+
 
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
