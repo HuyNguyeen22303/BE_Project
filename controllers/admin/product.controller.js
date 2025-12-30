@@ -49,11 +49,27 @@ module.exports.index = async (req, res) => {
 
 
   // End pagination
+ 
+  
+ // --- Start Sort ---
+let sort = {};
 
+const sortKey = req.query.sortKey || req.query.sortkey;
+const sortValue = req.query.sortValue || req.query.sortvalue;
 
-  const products = await product.find(find).limit(objectPagination.limitItem).skip(objectPagination.skip).sort({
-    position: "desc"
-  });
+if (sortKey && sortValue) {
+    sort[sortKey] = sortValue;
+} else {
+    
+    sort.position = "desc";
+}
+// --- End Sort ---
+
+  const products = await product.find(find)
+    .sort(sort)
+    .limit(objectPagination.limitItem)
+    .skip(objectPagination.skip);
+
 
   res.render("admin/pages/products/index", {
     pageTitle: "Trang sản phẩm",
@@ -195,7 +211,7 @@ module.exports.createPost = async (req, res) => {
 
 
 
-  
+
 
 
   const products = new product(req.body);
@@ -284,7 +300,7 @@ module.exports.editPatch = async (req, res) => {
   req.body.stock = parseInt(req.body.stock);
   req.body.position = parseInt(req.body.position);
 
- 
+
 
 
   try {
